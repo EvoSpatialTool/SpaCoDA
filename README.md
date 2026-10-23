@@ -55,10 +55,6 @@ devtools::install("EvoSpatialTool/SpaCoDA")
 
 ## Tutorial
 
-The code below runs as written, in order, in about a minute. Section 0 simulates a small
-data set with known truth; with your own data, replace section 0 by your inputs (see
-[Inputs](#inputs)).
-
 ### 0. Example data
 
 A single-cell reference with 6 cell types and two spatial sections on a Visium-like grid.
