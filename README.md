@@ -1,6 +1,6 @@
 # SpaCoDA <img src="man/figures/logo.svg" align="right" height="140"/>
 
-**Spa**tial **Co**mpositional **D**econvolution **A**lgorithm — fast compositional deconvolution maps recurrent cellular niches across hundreds of spatial transcriptomics sections
+Fast compositional deconvolution maps recurrent cellular niches across hundreds of spatial transcriptomics sections
 
 ---
 
