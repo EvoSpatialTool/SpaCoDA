@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 600" width="520" height="600">
+  <title>SpaCoDA</title>
+  <!-- hexagon (same style as the former NicheDecon logo) -->
+  <polygon points="260,20 490,152 490,448 260,580 30,448 30,152"
+           fill="#23374f" stroke="#17263a" stroke-width="18" stroke-linejoin="round"/>
+  <polygon points="260,40 474,162 474,438 260,560 46,438 46,162"
+           fill="none" stroke="#ffffff" stroke-width="2"/>
+  <g transform="translate(0,-28)">
+  <!-- neighbourhood graph -->
+  <g stroke="#94a3b8" stroke-width="5" stroke-linecap="round">
+    <line x1="260" y1="205" x2="178" y2="320"/>
+    <line x1="260" y1="205" x2="342" y2="320"/>
+    <line x1="178" y1="320" x2="342" y2="320"/>
+    <line x1="178" y1="320" x2="116" y2="268"/>
+    <line x1="342" y1="320" x2="404" y2="268"/>
+    <line x1="260" y1="320" x2="218" y2="410"/>
+    <line x1="260" y1="320" x2="302" y2="410"/>
+  </g>
+  <g fill="#a0b2c8">
+    <circle cx="116" cy="268" r="10"/>
+    <circle cx="404" cy="268" r="10"/>
+    <circle cx="218" cy="410" r="10"/>
+    <circle cx="302" cy="410" r="10"/>
+  </g>
+  <!-- three spots, each a cell-type composition (pie) -->
+  <g stroke="#ffffff" stroke-width="3">
+    <!-- top: mostly red -->
+    <circle cx="260" cy="205" r="38" fill="#e64e36"/>
+    <path d="M260,205 L260,167 A38,38 0 0,0 229,183 Z" fill="#fbbf72"/>
+    <path d="M260,205 L229,183 A38,38 0 0,0 233,232 Z" fill="#4fb9d6"/>
+    <!-- left: mostly blue -->
+    <circle cx="178" cy="320" r="38" fill="#4fb9d6"/>
+    <path d="M178,320 L178,282 A38,38 0 0,1 213,305 Z" fill="#e64e36"/>
+    <path d="M178,320 L178,282 A38,38 0 0,0 142,335 Z" fill="#fbbf72"/>
+    <!-- right: mostly yellow -->
+    <circle cx="342" cy="320" r="38" fill="#fbbf72"/>
+    <path d="M342,320 L342,282 A38,38 0 0,1 368,292 Z" fill="#e64e36"/>
+    <path d="M342,320 L368,292 A38,38 0 0,1 364,351 Z" fill="#4fb9d6"/>
+  </g>
+  </g>
+  <text x="260" y="448" text-anchor="middle" font-family="Helvetica, Arial, sans-serif"
+        font-size="58" font-weight="bold" fill="#ffffff">SpaCoDA</text>
+  <text x="260" y="476" text-anchor="middle" font-family="Helvetica, Arial, sans-serif"
+        font-size="15" fill="#a0b2c8">spatial deconvolution &amp; niches</text>
+</svg>

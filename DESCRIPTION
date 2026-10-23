@@ -1,0 +1,28 @@
+Package: SpaCoDA
+Type: Package
+Title: Spatial Transcriptomics Deconvolution and Niche Discovery (Paper
+        Methods)
+Version: 0.3.0
+Authors@R: person(given = "Kai", email = "hsiaokaifan@gmail.com", role = c("aut", "cre"))
+Description: The methods of the accompanying paper. Estimates spot-level
+    cell-type proportions from spatial transcriptomics by a variance-weighted,
+    platform-corrected non-negative least-squares fit against a single-cell
+    reference, with an optional graph-Laplacian spatial smoothness term (off by
+    default); the hot loop is implemented in 'RcppArmadillo'. Finds spatial
+    niches per section from the Aitchison distance between spot compositions
+    fused with the spatial distance, integrates them across sections into
+    meta-niches, tests whether the composition is spatially organised, and
+    provides 'Seurat' wrappers.
+License: GPL-3
+Encoding: UTF-8
+Depends: R (>= 4.1)
+Imports: Matrix, nnls, FNN, Rcpp, igraph (>= 1.3.0), irlba, stats,
+        methods
+LinkingTo: Rcpp, RcppArmadillo
+Suggests: Seurat, SeuratObject, harmony, RSpectra, testthat (>= 3.0.0)
+Config/testthat/edition: 3
+RoxygenNote: 7.3.2
+NeedsCompilation: yes
+Packaged: 2026-10-23 10:47:10 UTC; admin
+Author: Kai [aut, cre]
+Maintainer: Kai <hsiaokaifan@gmail.com>
