@@ -2,8 +2,6 @@
 
 **Spa**tial **Co**mpositional **D**econvolution **A**lgorithm — fast compositional deconvolution maps recurrent cellular niches across hundreds of spatial transcriptomics sections
 
-[中文说明](README_zh.md) · [Changelog](NEWS.md)
-
 ---
 
 ## The method in brief
