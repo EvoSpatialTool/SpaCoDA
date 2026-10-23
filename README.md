@@ -1,13 +1,8 @@
 # SpaCoDA 0.3.0 — paper methods <img src="man/figures/logo.svg" align="right" height="140"/>
 
-**Spa**tial **Co**mpositional **D**econvolution **A**lgorithm — cell-type deconvolution of spatial
-transcriptomics and spatial niche discovery, **with the methods used in the accompanying paper**.
+**Spa**tial **Co**mpositional **D**econvolution **A**lgorithm — fast compositional deconvolution maps recurrent cellular niches across hundreds of spatial transcriptomics sections
 
 [中文说明](README_zh.md) · [Changelog](NEWS.md)
-
-> This version contains the paper's methods: variance-weighted NNLS deconvolution and the
-> Aitchison/PCoA niche pipeline with cross-section meta-niches. The revised methods (a
-> negative-binomial count model and niche method v2) are in SpaCoDA 1.0.0.
 
 ---
 
@@ -34,9 +29,7 @@ fitted by non-negative least squares, weighted by the negative-binomial mean–v
 relation. The weights and a gene-level platform factor, which absorbs systematic
 differences between the reference and the spatial assay, are re-estimated over three
 rounds. The fitted mRNA shares are converted to cell proportions using the cell size of
-each type. The core loop is C++, so a section takes seconds. An optional graph-Laplacian
-smoothness term exists (`lam`) but is off by default and was off in all analyses of the
-paper.
+each type. 
 
 **2. Niches within a section.** The compositions of the spots are compared by the
 Aitchison distance (log-ratio geometry for proportions). This distance is fused with the
@@ -49,10 +42,6 @@ is kept. Each local niche is summarised by its mean composition (prototype).
 reduced by PCA, batch-corrected with Harmony and clustered together. The meta-niche label
 is then mapped back to every spot.
 
-**4. Spatial test.** `niche_spatial_test()` tests, by permutation and without any
-clustering, whether neighbouring spots are more alike in composition than random spots.
-It is run for every section and reported with the niches.
-
 ---
 
 ## Installation
@@ -62,14 +51,8 @@ install.packages(c("Matrix", "nnls", "FNN", "Rcpp", "RcppArmadillo", "igraph", "
 install.packages(c("Seurat", "harmony", "RSpectra"))   # niche pipeline
 
 # from the source tarball
-install.packages("SpaCoDA_0.3.0.tar.gz", repos = NULL, type = "source")
+devtools::install("EvoSpatialTool/SpaCoDA")
 ```
-
-SpaCoDA compiles C++ code: on Windows install
-[Rtools](https://cran.r-project.org/bin/windows/Rtools/), on macOS the Xcode command-line tools.
-The niche functions need Seurat; `integrate_slices()` also needs harmony; RSpectra makes the
-principal-coordinate step faster without changing the result.
-
 ---
 
 ## Tutorial
@@ -180,23 +163,9 @@ round(meta$niche_summary_prop, 3)    # share of each meta-niche per section
 meta$spatial_tests                   # spatial test per section
 ```
 
-`resolution = NULL` picks the meta-niche resolution with the highest modularity. The
-paper used `resolution = 6`, which assumes thousands of prototypes (hundreds of sections).
-With only a few dozen prototypes, as here, Harmony warns "Too few cells"; that is harmless.
+`resolution = NULL` picks the meta-niche resolution with the highest modularity. 
 
-### 4. Testing for spatial structure
-
-```r
-propA <- t(resA$W_cell)
-niche_spatial_test(propA, sA$coords, n_perm = 199)$p_value          # organised: small p
-niche_spatial_test(propA[sample(nrow(propA)), ], sA$coords,
-                   n_perm = 199)$p_value                             # shuffled: large p
-```
-
-A large p means the composition has no spatial organisation in that section; contiguous
-niches found there come from the spatial distance term, not from the composition.
-
-### 5. Seurat objects
+### 4. Seurat objects
 
 ```r
 ## sc_obj: Seurat reference with a "celltype" column; st_obj: spatial Seurat object
@@ -231,13 +200,5 @@ niches found there come from the spatial distance term, not from the composition
 | `deconvolve_spots(lam =)` | 0 | spatial smoothing; lowered accuracy in every simulation we tried |
 | `define_niches(expr_weight =, spat_weight =)` | 0.7, 0.3 | weights of the composition and spatial distance |
 | `define_niches(resolution_seq =)` | 0.3–3 | candidate resolutions; the one with maximum modularity is kept |
-| `integrate_slices(resolution =)` | 6 (paper) | meta-niche resolution; `NULL` selects it by modularity |
+| `integrate_slices(resolution =)` | numeric | meta-niche resolution; `NULL` selects it by modularity |
 
-Every function has a help page, e.g. `?deconvolve_spots`, `?define_niches`, `?integrate_slices`.
-
-## Citation and license
-
-> Kai (2026). *SpaCoDA: compositional deconvolution and niche discovery for spatial
-> transcriptomics*. R package version 0.3.0.
-
-GPL-3. Questions and bug reports: please open an issue.
